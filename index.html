@@ -3,22 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Version Control System</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Version Control Editor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="editor">
-        <h2>Version Control System</h2>
-        <h2>Editor</h2>
-        <textarea id="textInput"></textarea>
-        <br>
-        <button onclick="saveVersion()">Save</button>
-        <button onclick="undo()">&#x21B6; </button>
-        <button onclick="redo()">&#x21B7;</button>
-    </div>
-    <div class="versions">
-        <h2>Versions List</h2>
-        <ul id="versionList"></ul>
+    <div class="container">
+        <h2 class="title">Version Control</h2>
+        <div class="editor-container">
+            <div class="versions">
+                <div class="versions-header">
+                    <h3>Versions:</h3>
+                </div>
+                <div class="version-list">
+                    <ul id="versionList"></ul>
+                </div>
+            </div>
+            <div class="editor">
+                <h3>Editor</h3>
+                <div class="textarea-container">
+                    <textarea id="textInput"></textarea>
+                </div>
+                <div class="buttons-container">
+                    <button onclick="undo()">&#x21A9;</button>
+                    <button onclick="redo()">&#x21AA;</button>
+                    <button class="save-btn" onclick="saveVersion()">Save</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
