@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Version Control System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="editor">
+        <h2>Version Control System</h2>
+        <h2>Editor</h2>
+        <textarea id="textInput"></textarea>
+        <br>
+        <button onclick="saveVersion()">Save</button>
+        <button onclick="undo()">&#x21B6; </button>
+        <button onclick="redo()">&#x21B7;</button>
+    </div>
+    <div class="versions">
+        <h2>Versions List</h2>
+        <ul id="versionList"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
