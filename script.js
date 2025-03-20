@@ -10,28 +10,39 @@ class VersionControl {
         this.currentVersion = null;
         this.undoStack = [];
         this.redoStack = [];
+        this.changes = "";
     }
 
     saveVersion(content) {
         const newVersion = new Version(content, this.currentVersion);
         this.currentVersion = newVersion;
-        this.undoStack.push(newVersion);
-        this.redoStack = [];
         this.updateVersionList();
     }
 
+    saveChanges(content) {
+        this.undoStack.push(content);
+        this.redoStack = []; // Clear redo stack after a new change
+    }
+
     undo() {
-        if (this.currentVersion && this.currentVersion.previous) {
-            this.redoStack.push(this.currentVersion);
-            this.currentVersion = this.currentVersion.previous;
-            document.getElementById("textInput").value = this.currentVersion.content;
+        if (this.undoStack.length > 0) {
+            const lastWord = this.undoStack.pop();
+            this.redoStack.push(lastWord);
+    
+            // Reconstruct the entire text from what's left in the undoStack
+            let newText = this.undoStack.join("");
+            document.getElementById("textInput").value = newText;
         }
     }
+    
 
     redo() {
         if (this.redoStack.length > 0) {
-            this.currentVersion = this.redoStack.pop();
-            document.getElementById("textInput").value = this.currentVersion.content;
+            const word = this.redoStack.pop();
+            this.undoStack.push(word);
+
+            let currentText = document.getElementById("textInput").value;
+            document.getElementById("textInput").value = currentText + word;
         }
     }
 
@@ -55,9 +66,15 @@ class VersionControl {
 
 const vcs = new VersionControl();
 
-document.getElementById("textInput").addEventListener("input", () => {
-    vcs.saveVersion(document.getElementById("textInput").value);
+document.getElementById("textInput").addEventListener("input", (e) => {
+    if (e.data && e.data !== " ") {
+        vcs.changes += e.data;
+    } else if (e.data === " ") {
+        vcs.saveChanges(vcs.changes + " ");
+        vcs.changes = "";
+    }
 });
+
 
 document.querySelector("button[onclick='saveVersion()']").addEventListener("click", () => {
     vcs.saveVersion(document.getElementById("textInput").value);
