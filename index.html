@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Version Control Editor</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Version Control Editor</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h2 class="title">Version Control</h2>
-        <div class="editor-container">
-            <div class="versions">
-                <div class="versions-header">
-                    <h3>Versions:</h3>
-                </div>
-                <div class="version-list">
-                    <ul id="versionList"></ul>
-                </div>
-            </div>
-            <div class="editor">
-                <h3>Editor</h3>
-                <div class="textarea-container">
-                    <textarea id="textInput"></textarea>
-                </div>
-                <div class="buttons-container">
-                    <button onclick="undo()">&#x21A9;</button>
-                    <button onclick="redo()">&#x21AA;</button>
-                    <button class="save-btn" onclick="saveVersion()">Save</button>
-                </div>
-            </div>
+  <div class="container">
+    <h2 class="title">Version Control</h2>
+    <div class="editor-container">
+      <div class="versions">
+        <div class="versions-header">
+          <h3>Versions:</h3>
         </div>
+        <div class="version-list">
+          <ul id="versionList"></ul>
+        </div>
+      </div>
+      <div class="editor">
+        <h3>Editor</h3>
+        <div class="textarea-container">
+          <textarea id="textInput"></textarea>
+        </div>
+        <div class="buttons-container">
+          <button onclick="undo()">&#x21A9;</button>
+          <button onclick="redo()">&#x21AA;</button>
+          <button class="save-btn" onclick="saveVersion()">Save</button>
+        </div>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
