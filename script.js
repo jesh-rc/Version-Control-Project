@@ -4,6 +4,7 @@ class Version {
       this.previous = previous;
     }
   }
+
   
   class VersionControl {
     constructor() {
