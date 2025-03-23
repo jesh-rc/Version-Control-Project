@@ -10,7 +10,8 @@ class VersionControl {
         this.currentVersion = null;
         this.undoStack = [];
         this.redoStack = [];
-        this.changes = "";
+        this.changeBuffer = "";
+        this.deletionBuffer = "";
     }
 
     saveVersion(content) {
@@ -20,29 +21,60 @@ class VersionControl {
     }
 
     saveChanges(content) {
-        this.undoStack.push(content);
-        this.redoStack = []; // Clear redo stack after a new change
+        if (content.trim() !== "") {
+            this.undoStack.push({ type: "add", value: content });
+            this.redoStack = [];
+        }
+    }
+
+    flushChangesBuffer() {
+        if (this.changeBuffer.length > 0) {
+            this.saveChanges(this.changeBuffer);
+            this.changeBuffer = "";
+        }
+    }
+
+    flushDeletionBuffer() {
+        if (this.deletionBuffer.length > 0) {
+            this.undoStack.push({ type: "delete", value: this.deletionBuffer });
+            this.deletionBuffer = "";
+            this.redoStack = [];
+        }
     }
 
     undo() {
+        this.flushDeletionBuffer();
+        this.flushChangesBuffer();
+
         if (this.undoStack.length > 0) {
-            const lastWord = this.undoStack.pop();
-            this.redoStack.push(lastWord);
-    
-            // Reconstruct the entire text from what's left in the undoStack
-            let newText = this.undoStack.join("");
-            document.getElementById("textInput").value = newText;
+            const action = this.undoStack.pop();
+            let text = document.getElementById("textInput").value;
+
+            if (action.type === "add") {
+                document.getElementById("textInput").value = text.slice(0, -action.value.length);
+                this.redoStack.push(action);
+            } else if (action.type === "delete") {
+                document.getElementById("textInput").value = text + action.value;
+                this.redoStack.push(action);
+            }
         }
     }
-    
 
     redo() {
-        if (this.redoStack.length > 0) {
-            const word = this.redoStack.pop();
-            this.undoStack.push(word);
+        this.flushDeletionBuffer();
+        this.flushChangesBuffer();
 
-            let currentText = document.getElementById("textInput").value;
-            document.getElementById("textInput").value = currentText + word;
+        if (this.redoStack.length > 0) {
+            const action = this.redoStack.pop();
+            let text = document.getElementById("textInput").value;
+
+            if (action.type === "add") {
+                document.getElementById("textInput").value = text + action.value;
+                this.undoStack.push(action);
+            } else if (action.type === "delete") {
+                document.getElementById("textInput").value = text.slice(0, -action.value.length);
+                this.undoStack.push(action);
+            }
         }
     }
 
@@ -67,16 +99,40 @@ class VersionControl {
 const vcs = new VersionControl();
 
 document.getElementById("textInput").addEventListener("input", (e) => {
-    if (e.data && e.data !== " ") {
-        vcs.changes += e.data;
-    } else if (e.data === " ") {
-        vcs.saveChanges(vcs.changes + " ");
-        vcs.changes = "";
+    if (e.inputType === "insertText" && e.data === " ") {
+        // Space means word ended; save it
+        vcs.changeBuffer += " ";
+        vcs.flushChangesBuffer();
+    } else if (e.inputType === "insertText") {
+        vcs.changeBuffer += e.data;
+    } else if (e.inputType === "deleteContentBackward") {
+        // Make sure to flush pending adds before deleting
+        vcs.flushChangesBuffer();
     }
 });
 
+document.getElementById("textInput").addEventListener("keydown", (e) => {
+    if (e.key === "Backspace") {
+        const input = document.getElementById("textInput");
+        let currentValue = input.value;
+
+        if (currentValue.length > 0) {
+            const deletedChar = currentValue.slice(-1);
+            input.value = currentValue.slice(0, -1);
+
+            vcs.deletionBuffer = deletedChar + vcs.deletionBuffer;
+
+            if (deletedChar === " " || input.value.length === 0) {
+                vcs.flushDeletionBuffer();
+            }
+
+            e.preventDefault();
+        }
+    }
+});
 
 document.querySelector("button[onclick='saveVersion()']").addEventListener("click", () => {
+    vcs.flushChangesBuffer();
     vcs.saveVersion(document.getElementById("textInput").value);
 });
 
