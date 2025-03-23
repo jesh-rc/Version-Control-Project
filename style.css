@@ -1,121 +1,121 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-/* Ensure full-screen centering */
-body, html {
-    height: 100%;
-    width: 100%;
+/* Global Reset */
+* {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #001f3f; /* Deep Navy Blue */
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Full-screen centering with background */
+  html, body {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* Main container */
-.container {
+    background-color: #001f3f; /* Navy Blue */
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Fixed main container (600px tall) */
+  .container {
     width: 1100px;
     height: 600px;
+    background: #fff;
+    border: 3px solid #ffcc00; /* Gold */
+    border-radius: 10px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    background: white;
-    border: 3px solid #ffcc00; /* Gold Border */
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    border-radius: 10px; /* Rounded corners */
-}
-
-/* Title */
-.title {
+  }
+  
+  /* Fixed title (60px tall) */
+  .title {
+    height: 60px;
+    background: #ffcc00; /* Gold */
+    color: #001f3f;      /* Navy */
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    padding: 15px;
-    background: #ffcc00; /* Gold Header */
-    color: #001f3f; /* Navy Blue Text */
-    margin: 0;
+    line-height: 60px;
     border-bottom: 3px solid #001f3f;
-}
-
-/* Editor container (Fixed height) */
-.editor-container {
+  }
+  
+  /* Editor container occupies the remaining 540px */
+  .editor-container {
+    flex: 1;
     display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-/* Versions Section (Fixed Height) */
-.versions {
+    height: calc(100% - 60px);
+  }
+  
+  /* Left panel: Versions */
+  .versions {
     width: 30%;
-    background: #f8f9fa; /* Light Gray */
-    border-right: 3px solid #001f3f; /* Navy Blue Divider */
+    height: 100%;
+    background: #f8f9fa;             /* Light Gray */
+    border-right: 3px solid #001f3f; /* Navy */
     display: flex;
     flex-direction: column;
-    height: 100%; /* FIXED HEIGHT */
-}
-
-/* Versions Header (Fixed) */
-.versions-header {
-    padding: 15px;
-    background: #ffcc00; /* Gold Header */
-    color: #001f3f;
-    font-size: 1.2rem;
+  }
+  
+  /* Versions header fixed at 50px */
+  .versions-header {
+    height: 50px;
+    background: #ffcc00; /* Gold */
+    color: #001f3f;      /* Navy */
     text-align: center;
+    font-size: 1.2rem;
     font-weight: bold;
+    line-height: 50px;
     border-bottom: 2px solid #001f3f;
-}
-
-/* Scrollable Version List */
-.version-list {
-    flex-grow: 1;
-    overflow-y: auto; /* Enable scrolling */
+  }
+  
+  /* Version list container: fixed height and scrollable */
+  .version-list {
+    height: calc(100% - 50px);
+    overflow-y: scroll; /* Forces a scrollbar even if empty */
     padding: 10px;
-}
-
-/* Version items */
-.version-list ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-
-.version-list li {
+  }
+  
+  .version-list ul {
+    list-style: none;
+  }
+  
+  .version-list li {
     padding: 8px;
     font-size: 16px;
     border-bottom: 1px solid #ddd;
-}
-
-.version-list li:hover {
+  }
+  
+  .version-list li:hover {
     background: #ffcc00;
     cursor: pointer;
-}
-
-/* Editor Section (Fixed Height) */
-.editor {
+  }
+  
+  /* Right panel: Editor */
+  .editor {
     width: 70%;
+    height: 100%;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 15px;
-    height: 100%; /* FIXED HEIGHT */
-    position: relative;
-    justify-content: space-between; /* Ensures elements stay spaced */
-}
-
-/* Textarea Container */
-.textarea-container {
-    flex-grow: 1; /* Takes available space */
+  }
+  
+  /* Editor heading */
+  .editor h3 {
+    margin-bottom: 10px;
+  }
+  
+  /* Textarea container takes remaining space above buttons */
+  .textarea-container {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 5px; /* Reduced space to move buttons up */
-}
-
-/* Keep textarea from expanding */
-textarea {
+  }
+  
+  textarea {
     width: 95%;
-    height: 55%; /* Reduced height to make more space for buttons */
+    height: 100%;
     font-size: 16px;
     padding: 10px;
     border: 2px solid #001f3f;
@@ -123,46 +123,31 @@ textarea {
     background: #f8f9fa;
     resize: none;
     overflow-y: auto;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Buttons Container */
-.buttons-container {
+  }
+  
+  /* Buttons container fixed (50px tall) at the bottom */
+  .buttons-container {
+    height: 50px;
     display: flex;
-    justify-content: flex-start; /* Align buttons to the left */
-    gap: 10px; /* Adds spacing between buttons */
-    padding: 5px 0; /* Reduced padding to bring buttons up */
-    position: absolute;
-    bottom: 25px; /* Moved buttons higher */
-    width: 100%;
-    background: white;
-}
-
-/* Button Styling */
-button {
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  button {
     padding: 12px 18px;
     font-size: 16px;
     cursor: pointer;
     border: none;
-    background-color: #001f3f; /* Navy Blue */
-    color: #ffcc00; /* Gold Text */
+    background-color: #001f3f;
+    color: #ffcc00;
     border-radius: 5px;
     font-weight: bold;
     transition: 0.3s;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: #ffcc00;
     color: #001f3f;
-}
-
-/* Ensure buttons don't disappear */
-.buttons-container button {
-    margin-right: 5px;
-}
-
-/* Save button is now closer */
-.save-btn {
-    margin-left: 0; /* Move it closer */
-}
+  }
+  
