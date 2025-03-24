@@ -4,7 +4,6 @@ class Version {
       this.previous = previous;
     }
   }
-
   
   class VersionControl {
     constructor() {
@@ -15,9 +14,17 @@ class Version {
       this.deletionBuffer = "";
     }
   
+    clearHistory() {
+      this.undoStack = [];
+      this.redoStack = [];
+      this.changeBuffer = "";
+      this.deletionBuffer = "";
+    }
+  
     saveVersion(content) {
       const newVersion = new Version(content, this.currentVersion);
       this.currentVersion = newVersion;
+      this.clearHistory(); // Clear stacks and buffers after save
       this.updateVersionList();
     }
   
@@ -83,7 +90,6 @@ class Version {
       const list = document.getElementById("versionList");
       list.innerHTML = "";
   
-      // Count total versions
       let temp = this.currentVersion;
       let count = 0;
       while (temp) {
@@ -91,7 +97,6 @@ class Version {
         temp = temp.previous;
       }
   
-      // Build list with descending numbering
       temp = this.currentVersion;
       let currentVersionNumber = count;
       while (temp) {
@@ -101,6 +106,7 @@ class Version {
         li.onclick = () => {
           if (confirm("Do you want to revert back to this version?")) {
             document.getElementById("textInput").value = version.content;
+            this.clearHistory(); // Clear history on revert
           }
         };
         list.appendChild(li);
@@ -112,7 +118,6 @@ class Version {
   
   const vcs = new VersionControl();
   
-  // Listen for text input to handle typed characters
   document.getElementById("textInput").addEventListener("input", (e) => {
     if (e.inputType === "insertText" && e.data === " ") {
       vcs.changeBuffer += " ";
@@ -124,7 +129,6 @@ class Version {
     }
   });
   
-  // Handle Backspace manually so we can track deletions
   document.getElementById("textInput").addEventListener("keydown", (e) => {
     if (e.key === "Backspace") {
       const input = document.getElementById("textInput");
@@ -141,9 +145,9 @@ class Version {
     }
   });
   
-  // Hook up buttons
   document.querySelector("button[onclick='saveVersion()']").addEventListener("click", () => {
     vcs.flushChangesBuffer();
+    vcs.flushDeletionBuffer();
     vcs.saveVersion(document.getElementById("textInput").value);
   });
   
