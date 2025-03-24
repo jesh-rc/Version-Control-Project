@@ -1,7 +1,8 @@
 class Version {
-    constructor(content, previous = null) {
+    constructor(content, previous = null, next = null) {
       this.content = content;
       this.previous = previous;
+      this.next = next;
     }
   }
   
@@ -23,8 +24,11 @@ class Version {
   
     saveVersion(content) {
       const newVersion = new Version(content, this.currentVersion);
+      if (this.currentVersion) {
+        this.currentVersion.next = newVersion; // link forward
+      }
       this.currentVersion = newVersion;
-      this.clearHistory(); // Clear stacks and buffers after save
+      this.clearHistory();
       this.updateVersionList();
     }
   
@@ -90,28 +94,30 @@ class Version {
       const list = document.getElementById("versionList");
       list.innerHTML = "";
   
-      let temp = this.currentVersion;
-      let count = 0;
-      while (temp) {
-        count++;
-        temp = temp.previous;
+      // Find oldest version (tail)
+      let tail = this.currentVersion;
+      while (tail && tail.previous) {
+        tail = tail.previous;
       }
   
-      temp = this.currentVersion;
-      let currentVersionNumber = count;
-      while (temp) {
-        const version = temp;
+      // Walk forward from oldest to newest version
+      let versionNumber = 1;
+      let current = tail;
+      while (current) {
+        const version = current;
         const li = document.createElement("li");
-        li.textContent = `Version ${currentVersionNumber}`;
+        li.textContent = `Version ${versionNumber}`;
         li.onclick = () => {
-          if (confirm("Do you want to revert back to this version?")) {
+          if (confirm("Do you want to revert to this version?")) {
             document.getElementById("textInput").value = version.content;
-            this.clearHistory(); // Clear history on revert
+            this.currentVersion = version;
+            this.clearHistory();
+            this.updateVersionList();
           }
         };
         list.appendChild(li);
-        temp = temp.previous;
-        currentVersionNumber--;
+        current = current.next;
+        versionNumber++;
       }
     }
   }
