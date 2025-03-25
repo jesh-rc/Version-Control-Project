@@ -3,34 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+   <!-- Website Name -->
   <title>Version Control Editor</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Link to CSS file -->
+  <link rel="stylesheet" href="style.css" /> 
 </head>
 <body>
+  <!-- Main container -->
   <div class="container">
+    
+    <!-- Title section -->
     <h2 class="title">Version Control</h2>
+    
+    <!-- Editor and version history container -->
     <div class="editor-container">
+      
+      <!-- Version history panel -->
       <div class="versions">
+        
+        <!-- Version header -->
         <div class="versions-header">
           <h3>Versions:</h3>
         </div>
+        
+        <!-- List of saved versions -->
         <div class="version-list">
           <ul id="versionList"></ul>
         </div>
+        
       </div>
+
+      <!-- Editor panel -->
       <div class="editor">
         <h3>Editor</h3>
+        
+        <!-- Text input area -->
         <div class="textarea-container">
           <textarea id="textInput"></textarea>
         </div>
+        
+        <!-- Button div -->
         <div class="buttons-container">
-          <button onclick="undo()">&#x21A9;</button>
-          <button onclick="redo()">&#x21AA;</button>
-          <button class="save-btn" onclick="saveVersion()">Save</button>
+          <button onclick="undo()">&#x21A9;</button> <!-- Undo button -->
+          <button onclick="redo()">&#x21AA;</button> <!-- Redo button -->
+          <button class="save-btn" onclick="saveVersion()">Save</button> <!-- Save button -->
         </div>
+        
       </div>
     </div>
   </div>
+  
+  <!-- Link to JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
