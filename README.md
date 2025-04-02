@@ -197,56 +197,9 @@ Restore a Previous Version: Click on the version logged in the Version History p
 
 
 
-How It Works   
-
-
-
-The application possesses a VersionControl class to save versions, undo/redo stacks, and text change buffers.
-
-
-
-The Save button saves the current text as a new Version object.
-
-
-
-Undo and Redo are achieved by pushing and popping changes into stacks.
-
-
-
-
-
-
-
-Deletions and insertions of text are buffered to monitor changes.
-
-
-
-Troubleshooting
-
-
-
-All files must be in one directory before opening index.html.
-
-
 
 _______
 
 
 
-If the above application is not working as expected then utilize browser console to check if there is any JavaScript error.
-
-
-
-Future Development
-
-
-
-Include export/import option for saved versions.
-
-
-
-Enhance the UI/UX for better user experience.
-
-
-
-Include collaborative editing feature.
+If the above application is not working as expected then please contact author(s).
