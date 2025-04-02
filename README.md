@@ -1,8 +1,8 @@
 Description
 
 
+This program is a basic version control text editor that uses HTML, CSS, and JavaScript. The program allows the user to enter text and save multiple versions. The user can perform undo/redo functionality, as well as restoration of previous versions.
 
-It is a basic version control text editor that uses HTML, CSS, and JavaScript. Provides text input and then multiple versions saved. The program provides undo/redo. It provides the user with a version history panel to revert and see earlier versions.
 
 
 
@@ -10,11 +10,12 @@ Features
 
 
 
-Save Versions: Saves snapshots of the various versions of the text that have been completed.
+Save Versions: Saves a snapshot of the current version of text in a doubly linked-list.
 
-Undo /Redo: Undo or redo previous action.
+Undo/Redo: Undo or redo words. 
+  **NOTE: The way this feature was implemented requires the use of spaces. The feature will not work correctly if the user hits backspace in the middle of a word and types something new.**
 
-Version History Panel: Provides the user with various versions to see and revert to.
+Version History Panel: Provides the user with various versions to view and revert to.
 
 
 
