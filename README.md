@@ -1,4 +1,4 @@
-Description
+**Description:**
 
 
 This program is a basic version control text editor that uses HTML, CSS, and JavaScript. The program allows the user to enter text and save multiple versions. The user can perform undo/redo functionality, as well as restoration of previous versions.
@@ -6,14 +6,15 @@ This program is a basic version control text editor that uses HTML, CSS, and Jav
 
 
 
-Features
+**Features:**
 
 
 
 Save Versions: Saves a snapshot of the current version of text in a doubly linked-list.
 
-Undo/Redo: Undo or redo words. 
-  **NOTE: The way this feature was implemented requires the use of spaces. The feature will not work correctly if the user hits backspace in the middle of a word and types something new.**
+Undo/Redo: Undo or redo words.
+
+ **NOTE: The way this feature was implemented requires the use of spaces. The feature will not work correctly if the user hits backspace in the middle of a word and types something new.**
 
 Version History Panel: Provides the user with various versions to view and revert to.
 
@@ -31,7 +32,7 @@ Version History Panel: Provides the user with various versions to view and rever
 
 
 
-Responsive UI: Written in CSS in a simple and readable interface.
+**Responsive UI:** Written in CSS in a simple and readable interface.
 
 
 
@@ -51,7 +52,7 @@ Responsive UI: Written in CSS in a simple and readable interface.
 
 
 
-Files Included
+**Files Included:**
 
 
 
@@ -103,21 +104,6 @@ script.js: This JavaScript file implements version control, undo/redo, and versi
 
 
 
- 
-
-
-
- 
-
-
-
- 
-
-
-
-Setup and Usage
-
-
 
  
 
@@ -131,7 +117,7 @@ Setup and Usage
 
 
 
-Steps to Run the Code
+**Steps to Run the Code:**
 
 
 
@@ -147,7 +133,7 @@ Steps to Run the Code
 
 
 
-Download the files (index.html, style.css, script.js) into a directory on your machine.
+1. Download the files (index.html, style.css, script.js) into a directory on your machine.
 
 
 
@@ -155,7 +141,7 @@ Download the files (index.html, style.css, script.js) into a directory on your m
 
 
 
-Open index.html in your preferred web browser.
+2. Open index.html in your preferred web browser.
 
 
 
@@ -163,7 +149,7 @@ Open index.html in your preferred web browser.
 
 
 
-Commands to generate the Output
+**Functions:**
 
 
 
