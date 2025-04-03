@@ -165,7 +165,7 @@ Save a Version: Press the Save button to save the current page as a new version.
 
 
 
-Undo Changes: Press the Undo button (↩) to undo the last change.
+Undo Changes: Press the Undo button to undo the last change.
 
 
 
@@ -173,7 +173,7 @@ Undo Changes: Press the Undo button (↩) to undo the last change.
 
 
 
-Redo Changes: Press the Redo button (↪) to redo the last undone change.
+Redo Changes: Press the Redo button to redo the last undone change.
 
 
 
