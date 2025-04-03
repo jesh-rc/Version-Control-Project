@@ -198,6 +198,76 @@ Restore a Previous Version: Click on the version logged in the Version History p
 
 
 
+
+
+
+
+
+
+**Commands to generate output:**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Type "Good morning everyone" in the text editor.
+
+
+
+
+
+
+
+2. Hit undo and redo to view functionality.
+
+
+
+
+
+
+
+3. Redo so that the text says "Good morning everyone" and now backspace until the text reads "Good morning ", then enter "people." The text should now read "Good morning people."
+
+
+
+
+
+
+
+4. Hit undo and redo to view behvaiour of a deletion/replacement.
+
+
+
+
+
+
+
+5. Click save to save the version in version history.
+
+
+
+
+
+
+
+6. Change the text to "Goodnight everyone" and click save to store another version in the version history.
+
+
+
+
+
+
+
+7. Choose any of the versions in the version list on the left panel to revert to.
 _______
 
 
